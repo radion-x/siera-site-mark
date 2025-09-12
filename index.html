@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIERA - Healthcare Intelligence Platform</title>
+    <meta name="description" content="Built for Insight. Designed for Scale. SIERA delivers specialized healthcare intelligence through benchmarking, data monetization, and transparent outcomes.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <span class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">SIERA</span>
+                        <span class="ml-2 text-sm text-gray-600">Powered by SSRAA</span>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-8">
+                    <a href="#home" class="nav-link text-gray-700 hover:text-blue-600 transition-colors">Home</a>
+                    <a href="#data-strategy" class="nav-link text-gray-700 hover:text-blue-600 transition-colors">Data Strategy</a>
+                    <a href="#intelligence" class="nav-link text-gray-700 hover:text-blue-600 transition-colors">AI Intelligence</a>
+                    <a href="#transparency" class="nav-link text-gray-700 hover:text-blue-600 transition-colors">Transparency</a>
+                    <a href="#demos" class="nav-link text-gray-700 hover:text-blue-600 transition-colors">Live Demos</a>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">Get Started</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-16 bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen flex items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h1 class="text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+                        Built for <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Insight</span>.
+                        <br>Designed for <span class="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Scale</span>.
+                    </h1>
+                    <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                        Healthcare's future lies in comprehensive benchmarking and data-driven insights. SIERA transforms surgical outcomes through specialized intelligence, transparent analytics, and value-based clarity.
+                    </p>
+                    
+                    <!-- Stakeholder Navigation -->
+                    <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+                        <button onclick="showStakeholder('clinicians')" class="stakeholder-btn p-4 bg-white rounded-lg shadow hover:shadow-lg transition-all border-2 border-transparent hover:border-blue-500">
+                            <i class="fas fa-user-md text-blue-600 text-xl mb-2"></i>
+                            <div class="text-sm font-medium">Clinicians</div>
+                        </button>
+                        <button onclick="showStakeholder('hospitals')" class="stakeholder-btn p-4 bg-white rounded-lg shadow hover:shadow-lg transition-all border-2 border-transparent hover:border-green-500">
+                            <i class="fas fa-hospital text-green-600 text-xl mb-2"></i>
+                            <div class="text-sm font-medium">Hospitals</div>
+                        </button>
+                        <button onclick="showStakeholder('insurers')" class="stakeholder-btn p-4 bg-white rounded-lg shadow hover:shadow-lg transition-all border-2 border-transparent hover:border-purple-500">
+                            <i class="fas fa-shield-alt text-purple-600 text-xl mb-2"></i>
+                            <div class="text-sm font-medium">Insurers</div>
+                        </button>
+                        <button onclick="showStakeholder('patients')" class="stakeholder-btn p-4 bg-white rounded-lg shadow hover:shadow-lg transition-all border-2 border-transparent hover:border-red-500">
+                            <i class="fas fa-heart text-red-600 text-xl mb-2"></i>
+                            <div class="text-sm font-medium">Patients</div>
+                        </button>
+                        <button onclick="showStakeholder('device-companies')" class="stakeholder-btn p-4 bg-white rounded-lg shadow hover:shadow-lg transition-all border-2 border-transparent hover:border-indigo-500">
+                            <i class="fas fa-cogs text-indigo-600 text-xl mb-2"></i>
+                            <div class="text-sm font-medium">Device Companies</div>
+                        </button>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium">
+                            Explore Live Demos
+                        </button>
+                        <button class="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-lg hover:bg-blue-50 transition-colors font-medium">
+                            Download Whitepaper
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-2xl shadow-xl p-8">
+                    <h3 class="text-2xl font-bold mb-6 text-center">Healthcare Benchmarking Excellence</h3>
+                    <div class="relative">
+                        <canvas id="benchmarkChart" style="height: 300px;"></canvas>
+                        <div class="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium animate-pulse">
+                            YOU ARE HERE
+                        </div>
+                    </div>
+                    <div class="mt-6 grid grid-cols-3 gap-4 text-center">
+                        <div>
+                            <div class="text-2xl font-bold text-blue-600">52nd</div>
+                            <div class="text-sm text-gray-600">Percentile</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-green-600">2,788</div>
+                            <div class="text-sm text-gray-600">Patients</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-purple-600">94%</div>
+                            <div class="text-sm text-gray-600">Recovery Rate</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data as IP Section -->
+    <section id="data-strategy" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-6">Your Data, Your Power</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Transform healthcare data from cost center to strategic asset. Silo, protect, and monetize your clinical insights through SIERA's intelligent platform.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h3 class="text-2xl font-bold mb-6">Strategic Data Monetization</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-blue-100 rounded-lg p-2">
+                                <i class="fas fa-database text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-2">SSRAA Research Authority</h4>
+                                <p class="text-gray-600">Clinical validation and research integrity through our specialized surgical research alliance.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-green-100 rounded-lg p-2">
+                                <i class="fas fa-coins text-green-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-2">Token-In / Token-Out Economy</h4>
+                                <p class="text-gray-600">Commercial access via Siera Pty Ltd's secure, value-based data exchange platform.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-purple-100 rounded-lg p-2">
+                                <i class="fas fa-shield-alt text-purple-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-2">Protected Intellectual Property</h4>
+                                <p class="text-gray-600">Advanced data silos with controlled bidding access for maximum value extraction.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 rounded-2xl p-8">
+                    <h4 class="text-xl font-bold mb-6 text-center">Token Flow Ecosystem</h4>
+                    <div class="token-flow-animation">
+                        <div class="flex justify-between items-center mb-8">
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold mb-2">
+                                    DATA
+                                </div>
+                                <div class="text-sm">Clinical Silos</div>
+                            </div>
+                            <div class="flex-1 relative mx-4">
+                                <div class="h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded"></div>
+                                <div class="absolute top-0 left-0 w-4 h-1 bg-white rounded animate-pulse"></div>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold mb-2">
+                                    AI
+                                </div>
+                                <div class="text-sm">SIERA Engine</div>
+                            </div>
+                            <div class="flex-1 relative mx-4">
+                                <div class="h-1 bg-gradient-to-r from-purple-500 to-green-500 rounded"></div>
+                                <div class="absolute top-0 left-0 w-4 h-1 bg-white rounded animate-pulse"></div>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center text-white font-bold mb-2">
+                                    VALUE
+                                </div>
+                                <div class="text-sm">Stakeholders</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-4 text-center">
+                        <div class="bg-white rounded-lg p-4">
+                            <div class="text-lg font-bold text-blue-600">1,247</div>
+                            <div class="text-sm text-gray-600">Token Requests</div>
+                        </div>
+                        <div class="bg-white rounded-lg p-4">
+                            <div class="text-lg font-bold text-purple-600">89</div>
+                            <div class="text-sm text-gray-600">Integrations</div>
+                        </div>
+                        <div class="bg-white rounded-lg p-4">
+                            <div class="text-lg font-bold text-green-600">2.4M</div>
+                            <div class="text-sm text-gray-600">Secured Data Points</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specialized Intelligence Section -->
+    <section id="intelligence" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-6">Precision Intelligence for Surgery</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    The future demands specialized models. SIERA's orthopaedic-focused vertical AI delivers targeted intelligence where generalist solutions fall short.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+                <div class="bg-white rounded-2xl p-8 shadow-lg">
+                    <h3 class="text-2xl font-bold mb-6">SIERA Module Suite</h3>
+                    <div class="space-y-4">
+                        <div onclick="showModuleDetail('SI.X')" class="module-card p-4 border border-gray-200 rounded-lg hover:border-blue-500 cursor-pointer transition-all">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <h4 class="font-semibold text-blue-600">SI.X - Surgical Excellence</h4>
+                                    <p class="text-sm text-gray-600">Outcome prediction and optimization</p>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </div>
+                        </div>
+                        <div onclick="showModuleDetail('SI.T')" class="module-card p-4 border border-gray-200 rounded-lg hover:border-green-500 cursor-pointer transition-all">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <h4 class="font-semibold text-green-600">SI.T - Technique Analysis</h4>
+                                    <p class="text-sm text-gray-600">Procedural methodology insights</p>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </div>
+                        </div>
+                        <div onclick="showModuleDetail('SI.RA')" class="module-card p-4 border border-gray-200 rounded-lg hover:border-purple-500 cursor-pointer transition-all">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <h4 class="font-semibold text-purple-600">SI.RA - Risk Assessment</h4>
+                                    <p class="text-sm text-gray-600">Predictive complication modeling</p>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </div>
+                        </div>
+                        <div onclick="showModuleDetail('SI.Q')" class="module-card p-4 border border-gray-200 rounded-lg hover:border-red-500 cursor-pointer transition-all">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <h4 class="font-semibold text-red-600">SI.Q - Quality Metrics</h4>
+                                    <p class="text-sm text-gray-600">Performance benchmarking</p>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </div>
+                        </div>
+                        <div onclick="showModuleDetail('SI.REC')" class="module-card p-4 border border-gray-200 rounded-lg hover:border-indigo-500 cursor-pointer transition-all">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <h4 class="font-semibold text-indigo-600">SI.REC - Recovery Intelligence</h4>
+                                    <p class="text-sm text-gray-600">Patient journey optimization</p>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8 shadow-lg">
+                    <h3 class="text-2xl font-bold mb-6">Generalist vs. Specialized</h3>
+                    <div class="space-y-6">
+                        <div class="comparison-section">
+                            <h4 class="font-semibold text-gray-500 mb-3">Generic AI Cloud</h4>
+                            <ul class="space-y-2 text-sm text-gray-600">
+                                <li class="flex items-center"><i class="fas fa-times text-red-500 mr-2"></i>Broad, unfocused insights</li>
+                                <li class="flex items-center"><i class="fas fa-times text-red-500 mr-2"></i>Limited surgical context</li>
+                                <li class="flex items-center"><i class="fas fa-times text-red-500 mr-2"></i>Generic benchmarking</li>
+                                <li class="flex items-center"><i class="fas fa-times text-red-500 mr-2"></i>One-size-fits-all approach</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="border-t pt-6">
+                            <h4 class="font-semibold text-blue-600 mb-3">SIERA Vertical Stack</h4>
+                            <ul class="space-y-2 text-sm text-gray-800">
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Orthopaedic-specialized models</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Surgical context awareness</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Procedure-specific benchmarks</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Qi™ curated patient interfaces</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+                        <h5 class="font-semibold text-blue-900 mb-2">Qi™ Apps Integration</h5>
+                        <p class="text-sm text-blue-800">Patient and clinic-facing applications that deliver SIERA insights through intuitive, specialized interfaces designed for surgical excellence.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Insurance Transparency Section -->
+    <section id="transparency" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-6">Transparency That Transforms Healthcare</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Breaking through systemic opacity in healthcare economics. SIERA delivers value-based clarity that benefits insurers, hospitals, and patients alike.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+                <div class="space-y-8">
+                    <div class="before-after-section">
+                        <h3 class="text-2xl font-bold mb-6">The Transparency Revolution</h3>
+                        
+                        <div class="mb-8">
+                            <h4 class="font-semibold text-red-600 mb-4 flex items-center">
+                                <i class="fas fa-eye-slash mr-2"></i>
+                                Before: Systemic Opacity
+                            </h4>
+                            <ul class="space-y-2 text-gray-600">
+                                <li class="flex items-center"><i class="fas fa-times text-red-500 mr-2"></i>Hidden outcome data</li>
+                                <li class="flex items-center"><i class="fas fa-times text-red-500 mr-2"></i>Unclear cost structures</li>
+                                <li class="flex items-center"><i class="fas fa-times text-red-500 mr-2"></i>Information asymmetry</li>
+                                <li class="flex items-center"><i class="fas fa-times text-red-500 mr-2"></i>Defensive healthcare practices</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h4 class="font-semibold text-green-600 mb-4 flex items-center">
+                                <i class="fas fa-eye mr-2"></i>
+                                After: SIERA Transparency
+                            </h4>
+                            <ul class="space-y-2 text-gray-800">
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Real-time outcome dashboards</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Clear ROI demonstrations</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Data-driven decision making</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Proactive quality improvement</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-gray-50 to-blue-50 rounded-2xl p-8">
+                    <h4 class="text-xl font-bold mb-6">Stakeholder Value Creation</h4>
+                    
+                    <div class="space-y-6">
+                        <div class="bg-white rounded-lg p-4 shadow-sm">
+                            <h5 class="font-semibold text-purple-600 mb-2 flex items-center">
+                                <i class="fas fa-shield-alt mr-2"></i>
+                                For Insurers
+                            </h5>
+                            <p class="text-sm text-gray-600">ROI dashboards, cost containment insights, and API integration for seamless workflow.</p>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-4 shadow-sm">
+                            <h5 class="font-semibold text-red-600 mb-2 flex items-center">
+                                <i class="fas fa-heart mr-2"></i>
+                                For Patients
+                            </h5>
+                            <p class="text-sm text-gray-600">Clear decision support, personalized recovery forecasts, and transparent outcome expectations.</p>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-4 shadow-sm">
+                            <h5 class="font-semibold text-green-600 mb-2 flex items-center">
+                                <i class="fas fa-hospital mr-2"></i>
+                                For Hospitals
+                            </h5>
+                            <p class="text-sm text-gray-600">Outcome variance reduction, quality improvement tracking, and competitive benchmarking.</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 p-4 bg-blue-100 rounded-lg">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-blue-600 mb-1">Healthcare Economics</div>
+                            <div class="text-sm text-blue-800">Transformed Through Transparency</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Demo Showcase -->
+    <section id="demos" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-6">Multi-Stakeholder Live Demo Showcase</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Experience SIERA's powerful analytics across all healthcare stakeholders. Real data, real insights, real value.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                <button onclick="showDemo('patient-context')" class="demo-card bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-all text-left border-2 border-transparent hover:border-red-500">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-heart text-red-500 text-2xl mr-3"></i>
+                        <h3 class="font-bold text-lg">Patient Results in Context</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Benchmarking dashboard with recovery predictions and peer comparisons.</p>
+                    <div class="text-sm text-red-600 font-medium">52nd percentile • 2,788 patients • 94% recovery rate</div>
+                </button>
+
+                <button onclick="showDemo('insurance-outcome')" class="demo-card bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-all text-left border-2 border-transparent hover:border-purple-500">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-shield-alt text-purple-500 text-2xl mr-3"></i>
+                        <h3 class="font-bold text-lg">Insurance Outcome Analytics</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Sector-wide performance comparison with cost containment insights.</p>
+                    <div class="text-sm text-purple-600 font-medium">76th percentile • 4,687 claims • $2.3M savings</div>
+                </button>
+
+                <button onclick="showDemo('ssraa-integration')" class="demo-card bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-all text-left border-2 border-transparent hover:border-blue-500">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-database text-blue-500 text-2xl mr-3"></i>
+                        <h3 class="font-bold text-lg">SSRAA Integration Portal</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Secure access management with compliance monitoring and API activity.</p>
+                    <div class="text-sm text-blue-600 font-medium">99.9% uptime • 1,247 API calls • Real-time monitoring</div>
+                </button>
+
+                <button onclick="showDemo('surgeon-value')" class="demo-card bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-all text-left border-2 border-transparent hover:border-green-500">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-user-md text-green-500 text-2xl mr-3"></i>
+                        <h3 class="font-bold text-lg">Surgeon Value Proposition</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Peer benchmarking with referral network analysis and performance trends.</p>
+                    <div class="text-sm text-green-600 font-medium">Top 15% performance • 156 referrals • 12% growth</div>
+                </button>
+
+                <button onclick="showDemo('surgeon-context')" class="demo-card bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-all text-left border-2 border-transparent hover:border-indigo-500">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-chart-line text-indigo-500 text-2xl mr-3"></i>
+                        <h3 class="font-bold text-lg">Surgeon Results in Context</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Individual surgeon performance within pooled cohort data analysis.</p>
+                    <div class="text-sm text-indigo-600 font-medium">85th percentile • 247 surgeons • 3,156 cases</div>
+                </button>
+
+                <div class="demo-card bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg p-6 border-2 border-dashed border-blue-300 flex items-center justify-center">
+                    <div class="text-center">
+                        <i class="fas fa-plus text-blue-400 text-3xl mb-3"></i>
+                        <h3 class="font-bold text-lg text-blue-600 mb-2">Custom Dashboards</h3>
+                        <p class="text-blue-500 text-sm">Tailored analytics for your specific needs</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Demo Display Area -->
+            <div id="demoDisplay" class="bg-white rounded-2xl shadow-xl p-8 min-h-96">
+                <div class="text-center py-20">
+                    <i class="fas fa-mouse-pointer text-gray-300 text-4xl mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-400 mb-2">Select a Demo Above</h3>
+                    <p class="text-gray-500">Click on any dashboard card to view the interactive demo</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust & Compliance -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-6">Trust, Security, and Compliance</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Enterprise-grade security meets clinical validation. SIERA's foundation is built on trust, compliance, and research integrity.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-lock text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Privacy Framework</h3>
+                    <ul class="text-gray-600 space-y-2">
+                        <li>HIPAA Compliance</li>
+                        <li>TGA Regulations</li>
+                        <li>Australian Privacy Principles</li>
+                        <li>End-to-end Encryption</li>
+                    </ul>
+                </div>
+
+                <div class="text-center">
+                    <div class="bg-green-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-certificate text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Clinical Validation</h3>
+                    <ul class="text-gray-600 space-y-2">
+                        <li>SSRAA Research Backing</li>
+                        <li>Peer-reviewed Studies</li>
+                        <li>Clinical Evidence Base</li>
+                        <li>Continuous Validation</li>
+                    </ul>
+                </div>
+
+                <div class="text-center">
+                    <div class="bg-purple-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-shield-alt text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Enterprise Security</h3>
+                    <ul class="text-gray-600 space-y-2">
+                        <li>Role-based Access Control</li>
+                        <li>Comprehensive Audit Logging</li>
+                        <li>24/7 Security Monitoring</li>
+                        <li>SOC 2 Type II</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Go-to-Market Strategy -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-6">Strategic Roadmap</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Four-phase approach to transforming healthcare intelligence from pilot validation to global expansion.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white rounded-lg p-6 shadow-lg">
+                    <div class="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                        <span class="font-bold text-blue-600">01</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">Pilot Phase</h3>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• SSRAA network validation</li>
+                        <li>• Early adopter results</li>
+                        <li>• Proof of concept delivery</li>
+                        <li>• Clinical outcome validation</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-lg p-6 shadow-lg">
+                    <div class="bg-green-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                        <span class="font-bold text-green-600">02</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">Commercial Launch</h3>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• SaaS pricing model</li>
+                        <li>• Token economy rollout</li>
+                        <li>• Multi-stakeholder onboarding</li>
+                        <li>• Revenue optimization</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-lg p-6 shadow-lg">
+                    <div class="bg-purple-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                        <span class="font-bold text-purple-600">03</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">Partnership Growth</h3>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• Device company integrations</li>
+                        <li>• Health system partnerships</li>
+                        <li>• Insurance provider networks</li>
+                        <li>• Technology alliances</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-lg p-6 shadow-lg">
+                    <div class="bg-red-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                        <span class="font-bold text-red-600">04</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">Global Expansion</h3>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• Regional compliance</li>
+                        <li>• Localized portals</li>
+                        <li>• International partnerships</li>
+                        <li>• Market leadership</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-12 bg-white rounded-2xl p-8 shadow-lg">
+                <h3 class="text-2xl font-bold mb-6 text-center">Business Model: Token-In / Token-Out Economy</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <i class="fas fa-arrow-down text-blue-600 text-2xl mb-3"></i>
+                        <h4 class="font-bold mb-2">Token-In</h4>
+                        <p class="text-sm text-gray-600">Data contribution earns access tokens for platform insights and benchmarking capabilities.</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-cogs text-purple-600 text-2xl mb-3"></i>
+                        <h4 class="font-bold mb-2">Processing</h4>
+                        <p class="text-sm text-gray-600">SIERA's AI engine transforms siloed data into actionable intelligence and comparative analytics.</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-arrow-up text-green-600 text-2xl mb-3"></i>
+                        <h4 class="font-bold mb-2">Token-Out</h4>
+                        <p class="text-sm text-gray-600">Stakeholders access premium insights, custom reports, and specialized analytics through token exchange.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="py-20 bg-gradient-to-br from-blue-600 to-purple-700 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold mb-6">Transform Healthcare Intelligence Today</h2>
+            <p class="text-xl mb-8 max-w-3xl mx-auto opacity-90">
+                SIERA provides the validation through SSRAA and delivers the intelligence through specialized AI. Together, we solve healthcare's opacity problem and bring clarity, benchmarking, and trust back into surgical care.
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12 max-w-4xl mx-auto">
+                <div class="text-center">
+                    <div class="text-3xl font-bold mb-2">Healthcare Excellence</div>
+                    <div class="text-sm opacity-80">Through Comprehensive Benchmarking</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold mb-2">Data Monetization</div>
+                    <div class="text-sm opacity-80">Strategic Asset Protection</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold mb-2">Specialized Models</div>
+                    <div class="text-sm opacity-80">Vertical AI Excellence</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold mb-2">Transparent Outcomes</div>
+                    <div class="text-sm opacity-80">Breaking Systemic Opacity</div>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="bg-white text-blue-600 px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors font-medium">
+                    Request Demo Access
+                </button>
+                <button class="border-2 border-white text-white px-8 py-3 rounded-lg hover:bg-white hover:text-blue-600 transition-colors font-medium">
+                    Partner with SIERA
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <span class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">SIERA</span>
+                        <span class="ml-2 text-sm text-gray-400">by SSRAA</span>
+                    </div>
+                    <p class="text-gray-400">Healthcare intelligence platform specializing in surgical outcomes and benchmarking excellence.</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Platform</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Live Demos</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">API Documentation</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Integration Guide</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Pricing</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Clinical Validation</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">White Papers</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Case Studies</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Research Papers</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Technical Support</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 SIERA Healthcare Intelligence Platform. Powered by SSRAA. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal for Module Details -->
+    <div id="moduleModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center">
+        <div class="bg-white rounded-2xl p-8 max-w-2xl mx-4 max-h-96 overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 id="modalTitle" class="text-2xl font-bold"></h3>
+                <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div id="modalContent" class="text-gray-600"></div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/charts.js"></script>
+</body>
+</html>
