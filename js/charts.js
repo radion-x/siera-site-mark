@@ -1,4 +1,17 @@
-// SIERA Healthcare Platform - Chart Management
+// SIERA Healthcare Platform - Professional Chart Management
+
+// Professional Healthcare Color Palette
+const CLINICAL_COLORS = {
+    primary: '#1e3a8a',      // Navy blue
+    secondary: '#374151',     // Charcoal gray
+    steel: '#475569',         // Steel gray
+    success: '#0f766e',       // Clinical teal
+    warning: '#dc2626',       // Clinical red
+    info: '#1d4ed8',          // Information blue
+    neutral: '#9ca3af',       // Neutral gray
+    light: '#f8fafc',         // Clinical light
+    border: '#e2e8f0'         // Border gray
+};
 
 // Chart configurations and instances
 let chartInstances = {};
@@ -11,7 +24,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 500);
 });
 
-// Main Benchmark Chart (Hero Section)
+// Professional Chart Defaults
+Chart.defaults.font.family = 'Inter, system-ui, sans-serif';
+Chart.defaults.font.size = 12;
+Chart.defaults.font.weight = '500';
+Chart.defaults.color = CLINICAL_COLORS.secondary;
+Chart.defaults.borderColor = CLINICAL_COLORS.border;
+Chart.defaults.backgroundColor = CLINICAL_COLORS.light;
+
+// Main Professional Benchmark Chart (Hero Section)
 function initializeBenchmarkChart() {
     const ctx = document.getElementById('benchmarkChart');
     if (!ctx) return;
@@ -28,31 +49,36 @@ function initializeBenchmarkChart() {
             datasets: [{
                 label: 'Sector Average',
                 data: benchmarkData.sectorAverage,
-                borderColor: '#e5e7eb',
-                backgroundColor: 'rgba(229, 231, 235, 0.1)',
+                borderColor: CLINICAL_COLORS.neutral,
+                backgroundColor: 'rgba(156, 163, 175, 0.05)',
                 borderWidth: 2,
                 fill: true,
-                tension: 0.4
+                tension: 0.3,
+                pointRadius: 3,
+                pointHoverRadius: 5
             }, {
                 label: 'Top 10%',
                 data: benchmarkData.top10,
-                borderColor: '#10b981',
-                backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                borderColor: CLINICAL_COLORS.success,
+                backgroundColor: 'rgba(15, 118, 110, 0.1)',
                 borderWidth: 2,
                 fill: false,
-                tension: 0.4
+                tension: 0.3,
+                pointRadius: 3,
+                pointHoverRadius: 5
             }, {
                 label: 'Your Performance',
                 data: benchmarkData.yourPerformance,
-                borderColor: '#3b82f6',
-                backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                borderColor: CLINICAL_COLORS.primary,
+                backgroundColor: 'rgba(30, 58, 138, 0.1)',
                 borderWidth: 3,
                 fill: false,
-                tension: 0.4,
-                pointBackgroundColor: '#3b82f6',
+                tension: 0.3,
+                pointBackgroundColor: CLINICAL_COLORS.primary,
                 pointBorderColor: '#ffffff',
                 pointBorderWidth: 2,
-                pointRadius: 6
+                pointRadius: 5,
+                pointHoverRadius: 7
             }]
         },
         options: {
@@ -68,15 +94,20 @@ function initializeBenchmarkChart() {
                     position: 'top',
                     labels: {
                         usePointStyle: true,
-                        padding: 20
+                        padding: 20,
+                        font: {
+                            weight: '500'
+                        }
                     }
                 },
                 tooltip: {
-                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                    backgroundColor: 'rgba(30, 58, 138, 0.95)',
                     titleColor: '#ffffff',
                     bodyColor: '#ffffff',
                     cornerRadius: 8,
-                    displayColors: true
+                    displayColors: true,
+                    borderColor: CLINICAL_COLORS.border,
+                    borderWidth: 1
                 }
             },
             scales: {
@@ -86,23 +117,40 @@ function initializeBenchmarkChart() {
                     },
                     title: {
                         display: true,
-                        text: 'Time Period'
+                        text: 'Time Period',
+                        font: {
+                            weight: '600'
+                        }
+                    },
+                    ticks: {
+                        font: {
+                            weight: '500'
+                        }
                     }
                 },
                 y: {
                     grid: {
-                        color: 'rgba(0, 0, 0, 0.05)'
+                        color: 'rgba(226, 232, 240, 0.5)',
+                        borderDash: [2, 2]
                     },
                     title: {
                         display: true,
-                        text: 'Performance Score'
+                        text: 'Performance Score',
+                        font: {
+                            weight: '600'
+                        }
                     },
                     min: 0,
-                    max: 100
+                    max: 100,
+                    ticks: {
+                        font: {
+                            weight: '500'
+                        }
+                    }
                 }
             },
             animation: {
-                duration: 2000,
+                duration: 1500,
                 easing: 'easeInOutQuart'
             }
         }
@@ -169,7 +217,7 @@ function getDemoChartType(demoType) {
     return chartTypes[demoType] || 'default';
 }
 
-// Patient Context Chart
+// Professional Patient Context Chart
 function initializePatientContextChart(ctx) {
     const data = {
         labels: ['0-10th', '10-25th', '25-50th', '50-75th', '75-90th', '90-100th'],
@@ -177,9 +225,14 @@ function initializePatientContextChart(ctx) {
             label: 'Patient Distribution',
             data: [156, 425, 687, 892, 456, 172],
             backgroundColor: [
-                '#fee2e2', '#fecaca', '#fca5a5', '#f87171', '#ef4444', '#dc2626'
+                'rgba(30, 58, 138, 0.8)',   // Primary navy
+                'rgba(30, 58, 138, 0.7)',
+                'rgba(30, 58, 138, 0.6)',
+                'rgba(30, 58, 138, 0.5)',
+                'rgba(30, 58, 138, 0.4)',
+                'rgba(30, 58, 138, 0.3)'
             ],
-            borderColor: '#dc2626',
+            borderColor: CLINICAL_COLORS.primary,
             borderWidth: 1
         }]
     };
@@ -195,6 +248,10 @@ function initializePatientContextChart(ctx) {
                     display: false
                 },
                 tooltip: {
+                    backgroundColor: 'rgba(30, 58, 138, 0.95)',
+                    titleColor: '#ffffff',
+                    bodyColor: '#ffffff',
+                    cornerRadius: 8,
                     callbacks: {
                         label: function(context) {
                             return `Patients: ${context.parsed.y}`;
@@ -206,13 +263,22 @@ function initializePatientContextChart(ctx) {
                 x: {
                     title: {
                         display: true,
-                        text: 'Performance Percentile'
+                        text: 'Performance Percentile',
+                        font: { weight: '600' }
+                    },
+                    grid: {
+                        display: false
                     }
                 },
                 y: {
                     title: {
                         display: true,
-                        text: 'Number of Patients'
+                        text: 'Number of Patients',
+                        font: { weight: '600' }
+                    },
+                    grid: {
+                        color: 'rgba(226, 232, 240, 0.5)',
+                        borderDash: [2, 2]
                     }
                 }
             }
@@ -222,26 +288,30 @@ function initializePatientContextChart(ctx) {
     chartInstances[ctx.id] = new Chart(ctx, config);
 }
 
-// Insurance Outcome Chart
+// Professional Insurance Outcome Chart
 function initializeInsuranceOutcomeChart(ctx) {
     const data = {
         labels: ['Q1 2023', 'Q2 2023', 'Q3 2023', 'Q4 2023', 'Q1 2024', 'Q2 2024'],
         datasets: [{
             label: 'Claims Cost ($M)',
             data: [2.8, 2.6, 2.4, 2.2, 2.0, 1.9],
-            backgroundColor: 'rgba(147, 51, 234, 0.2)',
-            borderColor: '#9333ea',
+            backgroundColor: 'rgba(30, 58, 138, 0.1)',
+            borderColor: CLINICAL_COLORS.primary,
             borderWidth: 3,
             fill: true,
-            tension: 0.4
+            tension: 0.3,
+            pointRadius: 4,
+            pointHoverRadius: 6
         }, {
             label: 'ROI Increase (%)',
             data: [8, 10, 12, 13, 14, 15],
-            backgroundColor: 'rgba(34, 197, 94, 0.2)',
-            borderColor: '#22c55e',
+            backgroundColor: 'rgba(15, 118, 110, 0.1)',
+            borderColor: CLINICAL_COLORS.success,
             borderWidth: 3,
             fill: false,
-            tension: 0.4,
+            tension: 0.3,
+            pointRadius: 4,
+            pointHoverRadius: 6,
             yAxisID: 'y1'
         }]
     };
@@ -259,7 +329,16 @@ function initializeInsuranceOutcomeChart(ctx) {
             plugins: {
                 legend: {
                     display: true,
-                    position: 'top'
+                    position: 'top',
+                    labels: {
+                        font: { weight: '500' }
+                    }
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(30, 58, 138, 0.95)',
+                    titleColor: '#ffffff',
+                    bodyColor: '#ffffff',
+                    cornerRadius: 8
                 }
             },
             scales: {
@@ -267,7 +346,11 @@ function initializeInsuranceOutcomeChart(ctx) {
                     display: true,
                     title: {
                         display: true,
-                        text: 'Quarter'
+                        text: 'Quarter',
+                        font: { weight: '600' }
+                    },
+                    grid: {
+                        display: false
                     }
                 },
                 y: {
@@ -276,7 +359,12 @@ function initializeInsuranceOutcomeChart(ctx) {
                     position: 'left',
                     title: {
                         display: true,
-                        text: 'Claims Cost ($M)'
+                        text: 'Claims Cost ($M)',
+                        font: { weight: '600' }
+                    },
+                    grid: {
+                        color: 'rgba(226, 232, 240, 0.5)',
+                        borderDash: [2, 2]
                     }
                 },
                 y1: {
@@ -285,7 +373,8 @@ function initializeInsuranceOutcomeChart(ctx) {
                     position: 'right',
                     title: {
                         display: true,
-                        text: 'ROI Increase (%)'
+                        text: 'ROI Increase (%)',
+                        font: { weight: '600' }
                     },
                     grid: {
                         drawOnChartArea: false,
