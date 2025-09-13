@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeAnimations();
     initializeInteractivity();
     setupSmoothScrolling();
+    initializeScrollProgress();
 });
 
 // Navigation Functions
@@ -547,6 +548,20 @@ function throttle(func, limit) {
 window.addEventListener('scroll', throttle(() => {
     // Handle scroll-based animations and effects
 }, 16)); // ~60fps
+
+// Scroll Progress Indicator
+function initializeScrollProgress() {
+    const progressBar = document.querySelector('.scroll-progress');
+    
+    if (progressBar) {
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            progressBar.style.width = scrolled + '%';
+        });
+    }
+}
 
 // Initialize everything when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
