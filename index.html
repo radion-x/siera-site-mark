@@ -37,27 +37,53 @@
     <!-- Navigation -->
     <nav class="bg-white shadow-lg fixed w-full z-50 border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20">
+            <div class="flex justify-between h-16 md:h-20">
                 <div class="flex items-center">
                     <div class="flex-shrink-0 flex items-center">
-                        <span class="text-3xl font-bold text-clinical-navy font-mono">SIERA</span>
-                        <span class="ml-3 text-sm font-medium text-clinical-steel bg-gray-100 px-2 py-1 rounded">Powered by SSRAA</span>
+                        <span class="text-2xl md:text-3xl font-bold text-clinical-navy font-mono">SIERA</span>
+                        <span class="hidden sm:block ml-2 md:ml-3 text-xs md:text-sm font-medium text-clinical-steel bg-gray-100 px-2 py-1 rounded">Powered by SSRAA</span>
                     </div>
                 </div>
-                <div class="flex items-center space-x-8">
-                    <a href="#home" class="nav-link text-clinical-steel hover:text-clinical-navy transition-colors font-medium">Home</a>
-                    <a href="#data-strategy" class="nav-link text-clinical-steel hover:text-clinical-navy transition-colors font-medium">Data Strategy</a>
-                    <a href="#intelligence" class="nav-link text-clinical-steel hover:text-clinical-navy transition-colors font-medium">AI Intelligence</a>
-                    <a href="#transparency" class="nav-link text-clinical-steel hover:text-clinical-navy transition-colors font-medium">Transparency</a>
-                    <a href="#demos" class="nav-link text-clinical-steel hover:text-clinical-navy transition-colors font-medium">Live Demos</a>
-                    <button class="btn-primary px-6 py-3 rounded-lg font-medium">Get Started</button>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-6 lg:space-x-8">
+                    <a href="#home" class="nav-link text-clinical-steel hover:text-clinical-navy transition-colors font-medium text-sm lg:text-base">Home</a>
+                    <a href="#data-strategy" class="nav-link text-clinical-steel hover:text-clinical-navy transition-colors font-medium text-sm lg:text-base">Data Strategy</a>
+                    <a href="#intelligence" class="nav-link text-clinical-steel hover:text-clinical-navy transition-colors font-medium text-sm lg:text-base">AI Intelligence</a>
+                    <a href="#transparency" class="nav-link text-clinical-steel hover:text-clinical-navy transition-colors font-medium text-sm lg:text-base">Transparency</a>
+                    <a href="#demos" class="nav-link text-clinical-steel hover:text-clinical-navy transition-colors font-medium text-sm lg:text-base">Live Demos</a>
+                    <button class="btn-primary px-4 lg:px-6 py-2 lg:py-3 rounded-lg font-medium text-sm lg:text-base">Get Started</button>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button type="button" class="mobile-menu-button text-clinical-steel hover:text-clinical-navy focus:outline-none focus:text-clinical-navy transition-colors p-2" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Navigation Menu -->
+            <div class="md:hidden hidden mobile-menu" id="mobile-menu">
+                <div class="px-2 pt-2 pb-3 space-y-1 bg-white border-t border-gray-100">
+                    <a href="#home" class="mobile-nav-link block px-3 py-2 text-clinical-steel hover:text-clinical-navy hover:bg-gray-50 transition-colors font-medium rounded-md">Home</a>
+                    <a href="#data-strategy" class="mobile-nav-link block px-3 py-2 text-clinical-steel hover:text-clinical-navy hover:bg-gray-50 transition-colors font-medium rounded-md">Data Strategy</a>
+                    <a href="#intelligence" class="mobile-nav-link block px-3 py-2 text-clinical-steel hover:text-clinical-navy hover:bg-gray-50 transition-colors font-medium rounded-md">AI Intelligence</a>
+                    <a href="#transparency" class="mobile-nav-link block px-3 py-2 text-clinical-steel hover:text-clinical-navy hover:bg-gray-50 transition-colors font-medium rounded-md">Transparency</a>
+                    <a href="#demos" class="mobile-nav-link block px-3 py-2 text-clinical-steel hover:text-clinical-navy hover:bg-gray-50 transition-colors font-medium rounded-md">Live Demos</a>
+                    <div class="pt-2">
+                        <button class="btn-primary w-full mx-3 px-4 py-2 rounded-lg font-medium text-center">Get Started</button>
+                    </div>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="pt-20 bg-white min-h-screen flex items-center border-b border-gray-100 relative overflow-hidden">
+    <section id="home" class="pt-16 md:pt-20 bg-white min-h-screen flex items-center border-b border-gray-100 relative overflow-hidden">
         <!-- Animated Background Elements -->
         <div class="floating-particles">
             <div class="particle"></div>
@@ -66,83 +92,92 @@
             <div class="particle"></div>
             <div class="particle"></div>
         </div>
+        
+        <!-- Expanding Circles for Light Background -->
+        <div class="floating-healthcare-elements">
+            <div class="expanding-circle"></div>
+            <div class="expanding-circle"></div>
+            <div class="expanding-circle"></div>
+            <div class="expanding-circle"></div>
+        </div>
+        
         <div class="gradient-orb"></div>
         <div class="gradient-orb"></div>
         
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-20 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
                 <div class="animate-fade-in-left">
-                    <div class="mb-6">
-                        <span class="inline-block bg-clinical-light border border-clinical-steel text-clinical-navy text-sm font-medium px-4 py-2 rounded-full mb-4 interactive-scale">
+                    <div class="mb-4 md:mb-6">
+                        <span class="inline-block bg-clinical-light border border-clinical-steel text-clinical-navy text-xs md:text-sm font-medium px-3 md:px-4 py-1 md:py-2 rounded-full mb-3 md:mb-4 interactive-scale">
                             Healthcare Intelligence Platform
                         </span>
                     </div>
-                    <h1 class="text-5xl lg:text-6xl font-bold text-clinical-charcoal mb-6 leading-tight">
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-clinical-charcoal mb-4 md:mb-6 leading-tight">
                         Built for <span class="text-clinical-navy">Insight</span>.
                         <br>Designed for <span class="text-clinical-navy">Scale</span>.
                     </h1>
-                    <p class="text-xl text-clinical-steel mb-8 leading-relaxed font-medium">
+                    <p class="text-base md:text-xl text-clinical-steel mb-6 md:mb-8 leading-relaxed font-medium">
                         Healthcare's future lies in comprehensive benchmarking and data-driven insights. SIERA transforms surgical outcomes through specialised intelligence, transparent analytics, and value-based clarity.
                     </p>
                     
                     <!-- Stakeholder Navigation -->
-                    <div class="mb-8">
-                        <h3 class="text-lg font-semibold text-clinical-charcoal mb-4">Select Your Role:</h3>
-                        <div class="grid grid-cols-2 lg:grid-cols-3 gap-3">
-                            <button onclick="showStakeholder('clinicians')" class="stakeholder-btn p-4 bg-white rounded-lg border border-gray-200 hover:border-clinical-navy transition-all">
-                                <i class="fas fa-user-md text-clinical-navy text-lg mb-2"></i>
-                                <div class="text-sm font-medium text-clinical-charcoal">Clinicians</div>
+                    <div class="mb-6 md:mb-8">
+                        <h3 class="text-base md:text-lg font-semibold text-clinical-charcoal mb-3 md:mb-4">Select Your Role:</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 md:gap-3">
+                            <button onclick="showStakeholder('clinicians')" class="stakeholder-btn p-2 md:p-4 bg-white rounded-lg border border-gray-200 hover:border-clinical-navy transition-all text-center">
+                                <i class="fas fa-user-md text-clinical-navy text-sm md:text-lg mb-1 md:mb-2"></i>
+                                <div class="text-xs md:text-sm font-medium text-clinical-charcoal">Clinicians</div>
                             </button>
-                            <button onclick="showStakeholder('hospitals')" class="stakeholder-btn p-4 bg-white rounded-lg border border-gray-200 hover:border-clinical-navy transition-all">
-                                <i class="fas fa-hospital text-clinical-navy text-lg mb-2"></i>
-                                <div class="text-sm font-medium text-clinical-charcoal">Hospitals</div>
+                            <button onclick="showStakeholder('hospitals')" class="stakeholder-btn p-2 md:p-4 bg-white rounded-lg border border-gray-200 hover:border-clinical-navy transition-all text-center">
+                                <i class="fas fa-hospital text-clinical-navy text-sm md:text-lg mb-1 md:mb-2"></i>
+                                <div class="text-xs md:text-sm font-medium text-clinical-charcoal">Hospitals</div>
                             </button>
-                            <button onclick="showStakeholder('insurers')" class="stakeholder-btn p-4 bg-white rounded-lg border border-gray-200 hover:border-clinical-navy transition-all">
-                                <i class="fas fa-shield-alt text-clinical-navy text-lg mb-2"></i>
-                                <div class="text-sm font-medium text-clinical-charcoal">Insurers</div>
+                            <button onclick="showStakeholder('insurers')" class="stakeholder-btn p-2 md:p-4 bg-white rounded-lg border border-gray-200 hover:border-clinical-navy transition-all text-center">
+                                <i class="fas fa-shield-alt text-clinical-navy text-sm md:text-lg mb-1 md:mb-2"></i>
+                                <div class="text-xs md:text-sm font-medium text-clinical-charcoal">Insurers</div>
                             </button>
-                            <button onclick="showStakeholder('patients')" class="stakeholder-btn p-4 bg-white rounded-lg border border-gray-200 hover:border-clinical-navy transition-all">
-                                <i class="fas fa-heart text-clinical-navy text-lg mb-2"></i>
-                                <div class="text-sm font-medium text-clinical-charcoal">Patients</div>
+                            <button onclick="showStakeholder('patients')" class="stakeholder-btn p-2 md:p-4 bg-white rounded-lg border border-gray-200 hover:border-clinical-navy transition-all text-center">
+                                <i class="fas fa-heart text-clinical-navy text-sm md:text-lg mb-1 md:mb-2"></i>
+                                <div class="text-xs md:text-sm font-medium text-clinical-charcoal">Patients</div>
                             </button>
-                            <button onclick="showStakeholder('device-companies')" class="stakeholder-btn p-4 bg-white rounded-lg border border-gray-200 hover:border-clinical-navy transition-all">
-                                <i class="fas fa-cogs text-clinical-navy text-lg mb-2"></i>
-                                <div class="text-sm font-medium text-clinical-charcoal">Device Companies</div>
+                            <button onclick="showStakeholder('device-companies')" class="stakeholder-btn p-2 md:p-4 bg-white rounded-lg border border-gray-200 hover:border-clinical-navy transition-all text-center col-span-2 md:col-span-1">
+                                <i class="fas fa-cogs text-clinical-navy text-sm md:text-lg mb-1 md:mb-2"></i>
+                                <div class="text-xs md:text-sm font-medium text-clinical-charcoal">Device Companies</div>
                             </button>
                         </div>
                     </div>
 
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <button class="btn-primary px-8 py-4 rounded-lg font-medium text-lg">
+                    <div class="flex flex-col sm:flex-row gap-3 md:gap-4">
+                        <button class="btn-primary px-6 md:px-8 py-3 md:py-4 rounded-lg font-medium text-base md:text-lg">
                             Explore Live Demos
                         </button>
-                        <button class="btn-secondary px-8 py-4 rounded-lg font-medium text-lg">
+                        <button class="btn-secondary px-6 md:px-8 py-3 md:py-4 rounded-lg font-medium text-base md:text-lg">
                             Download Whitepaper
                         </button>
                     </div>
                 </div>
                 
-                <div class="bg-white rounded-2xl shadow-clinical border border-gray-200 p-8">
-                    <div class="flex items-center justify-between mb-6">
-                        <h3 class="text-xl font-bold text-clinical-charcoal">Healthcare Benchmarking Excellence</h3>
-                        <span class="bg-clinical-navy text-white px-3 py-1 rounded-full text-sm font-medium">
+                <div class="bg-white rounded-2xl shadow-clinical border border-gray-200 p-4 md:p-8">
+                    <div class="flex items-center justify-between mb-4 md:mb-6">
+                        <h3 class="text-lg md:text-xl font-bold text-clinical-charcoal">Healthcare Benchmarking Excellence</h3>
+                        <span class="bg-clinical-navy text-white px-2 md:px-3 py-1 rounded-full text-xs md:text-sm font-medium">
                             LIVE DATA
                         </span>
                     </div>
                     <div class="relative chart-container">
-                        <canvas id="benchmarkChart" class="w-full h-80"></canvas>
-                        <div class="absolute top-4 right-4 bg-clinical-navy text-white px-3 py-1 rounded-full text-sm font-medium">
+                        <canvas id="benchmarkChart" class="w-full h-64 md:h-80"></canvas>
+                        <div class="absolute top-2 md:top-4 right-2 md:right-4 bg-clinical-navy text-white px-2 md:px-3 py-1 rounded-full text-xs md:text-sm font-medium">
                             YOU ARE HERE
                         </div>
                     </div>
-                    <div class="mt-6 grid grid-cols-3 gap-4 text-center">
-                        <div class="bg-gray-50 rounded-lg p-4">
-                            <div class="text-2xl font-bold text-clinical-navy">52nd</div>
-                            <div class="text-sm text-clinical-steel">Percentile</div>
+                    <div class="mt-4 md:mt-6 grid grid-cols-3 gap-2 md:gap-4 text-center">
+                        <div class="bg-gray-50 rounded-lg p-2 md:p-4">
+                            <div class="text-lg md:text-2xl font-bold text-clinical-navy">52nd</div>
+                            <div class="text-xs md:text-sm text-clinical-steel">Percentile</div>
                         </div>
-                        <div class="bg-gray-50 rounded-lg p-4">
-                            <div class="text-2xl font-bold text-clinical-navy">2,788</div>
-                            <div class="text-sm text-clinical-steel">Patients</div>
+                        <div class="bg-gray-50 rounded-lg p-2 md:p-4">
+                            <div class="text-lg md:text-2xl font-bold text-clinical-navy">2,788</div>
+                            <div class="text-xs md:text-sm text-clinical-steel">Patients</div>
                         </div>
                         <div class="bg-gray-50 rounded-lg p-4">
                             <div class="text-2xl font-bold text-clinical-navy">94%</div>
@@ -198,10 +233,39 @@
                     </div>
                 </div>
 
-                <div class="bg-white rounded-2xl border border-gray-200 shadow-clinical p-8">
-                    <h4 class="text-xl font-bold text-clinical-charcoal mb-6 text-center">Token Flow Ecosystem</h4>
+                <div class="bg-white rounded-2xl border border-gray-200 shadow-clinical p-4 md:p-8">
+                    <h4 class="text-lg md:text-xl font-bold text-clinical-charcoal mb-4 md:mb-6 text-center">Token Flow Ecosystem</h4>
                     <div class="token-flow-animation">
-                        <div class="flex justify-between items-center mb-8">
+                        <!-- Mobile: Vertical Layout -->
+                        <div class="md:hidden space-y-6">
+                            <div class="text-center">
+                                <div class="w-20 h-20 bg-clinical-navy rounded-full flex items-center justify-center text-white font-bold mb-3 mx-auto">
+                                    <span class="text-sm">DATA</span>
+                                </div>
+                                <div class="text-sm font-medium text-clinical-steel">Clinical Silos</div>
+                            </div>
+                            <div class="flex justify-center">
+                                <div class="w-1 h-8 bg-clinical-navy rounded"></div>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-20 h-20 bg-clinical-navy rounded-full flex items-center justify-center text-white font-bold mb-3 mx-auto">
+                                    <span class="text-sm">AI</span>
+                                </div>
+                                <div class="text-sm font-medium text-clinical-steel">SIERA Engine</div>
+                            </div>
+                            <div class="flex justify-center">
+                                <div class="w-1 h-8 bg-clinical-navy rounded"></div>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-20 h-20 bg-clinical-navy rounded-full flex items-center justify-center text-white font-bold mb-3 mx-auto">
+                                    <span class="text-xs">VALUE</span>
+                                </div>
+                                <div class="text-sm font-medium text-clinical-steel">Stakeholders</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Desktop: Horizontal Layout -->
+                        <div class="hidden md:flex justify-between items-center mb-8">
                             <div class="text-center">
                                 <div class="w-16 h-16 bg-clinical-navy rounded-full flex items-center justify-center text-white font-bold mb-2">
                                     DATA
@@ -231,17 +295,17 @@
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-3 gap-4 text-center">
-                        <div class="bg-clinical-light rounded-lg p-4">
-                            <div class="text-lg font-bold text-clinical-navy">1,247</div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 text-center mt-6 md:mt-0">
+                        <div class="bg-clinical-light rounded-lg p-3 md:p-4">
+                            <div class="text-xl md:text-lg font-bold text-clinical-navy">1,247</div>
                             <div class="text-sm text-clinical-steel">Token Requests</div>
                         </div>
-                        <div class="bg-clinical-light rounded-lg p-4">
-                            <div class="text-lg font-bold text-clinical-navy">89</div>
+                        <div class="bg-clinical-light rounded-lg p-3 md:p-4">
+                            <div class="text-xl md:text-lg font-bold text-clinical-navy">89</div>
                             <div class="text-sm text-clinical-steel">Integrations</div>
                         </div>
-                        <div class="bg-clinical-light rounded-lg p-4">
-                            <div class="text-lg font-bold text-clinical-navy">2.4M</div>
+                        <div class="bg-clinical-light rounded-lg p-3 md:p-4">
+                            <div class="text-xl md:text-lg font-bold text-clinical-navy">2.4M</div>
                             <div class="text-sm text-clinical-steel">Secured Data Points</div>
                         </div>
                     </div>
@@ -258,6 +322,16 @@
             <div class="data-line"></div>
             <div class="data-line"></div>
         </div>
+        
+        <!-- Expanding Circles for Light Background -->
+        <div class="floating-healthcare-elements">
+            <div class="expanding-circle"></div>
+            <div class="expanding-circle"></div>
+            <div class="expanding-circle"></div>
+            <div class="expanding-circle"></div>
+            <div class="expanding-circle"></div>
+        </div>
+        
         <div class="grid-background"></div>
         
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -269,51 +343,52 @@
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-                <div class="bg-clinical-light rounded-2xl border border-gray-200 shadow-clinical p-8">
-                    <h3 class="text-2xl font-bold text-clinical-charcoal mb-6">SIERA Module Suite</h3>
-                    <div class="space-y-3">
-                        <div onclick="showModuleDetail('SI.X')" class="module-card card-hover-effect interactive-scale p-5 bg-white border border-gray-200 rounded-lg hover:border-clinical-navy cursor-pointer transition-all shadow-clinical hover:shadow-elevated">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-16">
+                <!-- SIERA Module Suite -->
+                <div class="bg-clinical-light rounded-2xl border border-gray-200 shadow-clinical p-6 lg:p-8">
+                    <h3 class="text-xl lg:text-2xl font-bold text-clinical-charcoal mb-6">SIERA Module Suite</h3>
+                    <div class="space-y-4">
+                        <div onclick="showModuleDetail('SI.X')" class="module-card card-hover-effect interactive-scale p-4 lg:p-5 bg-white border border-gray-200 rounded-lg hover:border-clinical-navy cursor-pointer transition-all shadow-clinical hover:shadow-elevated">
                             <div class="flex justify-between items-center">
                                 <div>
-                                    <h4 class="font-semibold text-clinical-navy mb-1">SI.X - Surgical Excellence</h4>
-                                    <p class="text-sm text-clinical-steel">Outcome prediction and optimisation</p>
+                                    <h4 class="font-semibold text-clinical-navy mb-1 text-sm lg:text-base">SI.X - Surgical Excellence</h4>
+                                    <p class="text-xs lg:text-sm text-clinical-steel">Outcome prediction and optimisation</p>
                                 </div>
                                 <i class="fas fa-chevron-right text-clinical-steel"></i>
                             </div>
                         </div>
-                        <div onclick="showModuleDetail('SI.T')" class="module-card card-hover-effect interactive-scale p-5 bg-white border border-gray-200 rounded-lg hover:border-clinical-navy cursor-pointer transition-all shadow-clinical hover:shadow-elevated">
+                        <div onclick="showModuleDetail('SI.T')" class="module-card card-hover-effect interactive-scale p-4 lg:p-5 bg-white border border-gray-200 rounded-lg hover:border-clinical-navy cursor-pointer transition-all shadow-clinical hover:shadow-elevated">
                             <div class="flex justify-between items-center">
                                 <div>
-                                    <h4 class="font-semibold text-clinical-navy mb-1">SI.T - Technique Analysis</h4>
-                                    <p class="text-sm text-clinical-steel">Procedural methodology insights</p>
+                                    <h4 class="font-semibold text-clinical-navy mb-1 text-sm lg:text-base">SI.T - Technique Analysis</h4>
+                                    <p class="text-xs lg:text-sm text-clinical-steel">Procedural methodology insights</p>
                                 </div>
                                 <i class="fas fa-chevron-right text-clinical-steel"></i>
                             </div>
                         </div>
-                        <div onclick="showModuleDetail('SI.RA')" class="module-card card-hover-effect interactive-scale p-5 bg-white border border-gray-200 rounded-lg hover:border-clinical-navy cursor-pointer transition-all shadow-clinical hover:shadow-elevated">
+                        <div onclick="showModuleDetail('SI.RA')" class="module-card card-hover-effect interactive-scale p-4 lg:p-5 bg-white border border-gray-200 rounded-lg hover:border-clinical-navy cursor-pointer transition-all shadow-clinical hover:shadow-elevated">
                             <div class="flex justify-between items-center">
                                 <div>
-                                    <h4 class="font-semibold text-clinical-navy mb-1">SI.RA - Risk Assessment</h4>
-                                    <p class="text-sm text-clinical-steel">Predictive complication modeling</p>
+                                    <h4 class="font-semibold text-clinical-navy mb-1 text-sm lg:text-base">SI.RA - Risk Assessment</h4>
+                                    <p class="text-xs lg:text-sm text-clinical-steel">Predictive risk modeling</p>
                                 </div>
                                 <i class="fas fa-chevron-right text-clinical-steel"></i>
                             </div>
                         </div>
-                        <div onclick="showModuleDetail('SI.Q')" class="module-card card-hover-effect interactive-scale p-5 bg-white border border-gray-200 rounded-lg hover:border-clinical-navy cursor-pointer transition-all shadow-clinical hover:shadow-elevated">
+                        <div onclick="showModuleDetail('SI.Q')" class="module-card card-hover-effect interactive-scale p-4 lg:p-5 bg-white border border-gray-200 rounded-lg hover:border-clinical-navy cursor-pointer transition-all shadow-clinical hover:shadow-elevated">
                             <div class="flex justify-between items-center">
                                 <div>
-                                    <h4 class="font-semibold text-clinical-navy mb-1">SI.Q - Quality Metrics</h4>
-                                    <p class="text-sm text-clinical-steel">Performance benchmarking</p>
+                                    <h4 class="font-semibold text-clinical-navy mb-1 text-sm lg:text-base">SI.Q - Quality Metrics</h4>
+                                    <p class="text-xs lg:text-sm text-clinical-steel">Performance benchmarking</p>
                                 </div>
                                 <i class="fas fa-chevron-right text-clinical-steel"></i>
                             </div>
                         </div>
-                        <div onclick="showModuleDetail('SI.REC')" class="module-card card-hover-effect interactive-scale p-5 bg-white border border-gray-200 rounded-lg hover:border-clinical-navy cursor-pointer transition-all shadow-clinical hover:shadow-elevated">
+                        <div onclick="showModuleDetail('SI.REC')" class="module-card card-hover-effect interactive-scale p-4 lg:p-5 bg-white border border-gray-200 rounded-lg hover:border-clinical-navy cursor-pointer transition-all shadow-clinical hover:shadow-elevated">
                             <div class="flex justify-between items-center">
                                 <div>
-                                    <h4 class="font-semibold text-clinical-navy mb-1">SI.REC - Recovery Intelligence</h4>
-                                    <p class="text-sm text-clinical-steel">Patient journey optimisation</p>
+                                    <h4 class="font-semibold text-clinical-navy mb-1 text-sm lg:text-base">SI.REC - Recovery Intelligence</h4>
+                                    <p class="text-xs lg:text-sm text-clinical-steel">Patient journey optimization</p>
                                 </div>
                                 <i class="fas fa-chevron-right text-clinical-steel"></i>
                             </div>
@@ -321,7 +396,8 @@
                     </div>
                 </div>
 
-                <div class="bg-white rounded-2xl border border-gray-200 shadow-clinical p-8">
+                <!-- Enterprise AI Architecture -->
+                <div class="bg-white rounded-2xl border border-gray-200 shadow-clinical p-6 lg:p-8">
                     <h3 class="text-2xl font-bold text-clinical-charcoal mb-6">Enterprise AI Architecture</h3>
                     <div class="space-y-6">
                         <div class="bg-white border-l-4 border-red-500 rounded-lg p-6 shadow-clinical">
@@ -679,10 +755,31 @@
             <div class="particle particle-light"></div>
         </div>
         
+        <!-- Professional Floating Healthcare Elements -->
+        <div class="floating-healthcare-elements">
+            <!-- Expanding Circles -->
+            <div class="expanding-circle"></div>
+            <div class="expanding-circle"></div>
+            <div class="expanding-circle"></div>
+            <div class="expanding-circle"></div>
+            <div class="expanding-circle"></div>
+            <div class="expanding-circle"></div>
+            
+            <!-- Geometric Shapes -->
+            <div class="professional-geometric-shape shape-hexagon"></div>
+            <div class="professional-geometric-shape shape-diamond"></div>
+            <div class="professional-geometric-shape shape-plus"></div>
+            
+            <!-- Data Pulse Nodes -->
+            <div class="data-node-pulse"></div>
+            <div class="data-node-pulse"></div>
+            <div class="data-node-pulse"></div>
+        </div>
+        
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <div class="max-w-4xl mx-auto animate-fade-in-up">
-                <h2 class="text-4xl font-bold mb-6">Transform Healthcare Intelligence Today</h2>
-                <p class="text-xl mb-12 opacity-90 leading-relaxed">
+                <h2 class="text-4xl font-bold mb-6 text-white">Transform Healthcare Intelligence Today</h2>
+                <p class="text-xl mb-12 opacity-90 leading-relaxed text-white">
                     SIERA provides the validation through SSRAA and delivers the intelligence through specialised AI. Together, we solve healthcare's opacity problem and bring clarity, benchmarking, and trust back into surgical care.
                 </p>
                 

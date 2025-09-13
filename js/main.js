@@ -11,11 +11,75 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeInteractivity();
     setupSmoothScrolling();
     initializeScrollProgress();
+    initializeMobileMenu();
+    initializeResponsiveDemoHandling();
 });
+
+// Responsive Demo Handling
+function initializeResponsiveDemoHandling() {
+    // Handle window resize to ensure proper demo display
+    let resizeTimeout;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(function() {
+            handleViewportChange();
+        }, 250);
+    });
+}
+
+function handleViewportChange() {
+    const isMobile = window.innerWidth < 768;
+    const mobileModal = document.getElementById('mobileDemoModal');
+    const demoDisplay = document.getElementById('demoDisplay');
+    
+    // If we switched from mobile to desktop and there's a mobile modal open
+    if (!isMobile && mobileModal) {
+        // Close mobile modal and show in desktop area
+        const currentDemo = getCurrentDemoFromModal();
+        closeMobileDemo();
+        
+        if (currentDemo) {
+            setTimeout(() => {
+                showDesktopDemo(currentDemo);
+            }, 300);
+        }
+    }
+    
+    // If we switched from desktop to mobile and there's content in demo display
+    if (isMobile && demoDisplay && currentDemo) {
+        // Clear desktop display - mobile will use modal
+        demoDisplay.innerHTML = `
+            <div class="text-center py-20">
+                <i class="fas fa-mouse-pointer text-clinical-steel text-4xl mb-4"></i>
+                <h3 class="text-xl font-bold text-clinical-charcoal mb-2">Select a Demo Above</h3>
+                <p class="text-clinical-steel">Click on any dashboard card to view the interactive demo</p>
+            </div>
+        `;
+    }
+}
+
+function getCurrentDemoFromModal() {
+    const modal = document.getElementById('mobileDemoModal');
+    if (!modal) return null;
+    
+    const title = modal.querySelector('h3');
+    if (!title) return null;
+    
+    // Map titles back to demo types
+    const titleMap = {
+        'Patient Results in Context': 'patient-context',
+        'Insurance Outcome Analytics': 'insurance-outcome',
+        'SSRAA Integration Portal': 'ssraa-integration',
+        'Surgeon Value Proposition': 'surgeon-value',
+        'Surgeon Results in Context': 'surgeon-context'
+    };
+    
+    return titleMap[title.textContent] || null;
+}
 
 // Navigation Functions
 function initializeNavigation() {
-    const navLinks = document.querySelectorAll('.nav-link');
+    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
     
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
@@ -24,6 +88,12 @@ function initializeNavigation() {
             const targetSection = document.querySelector(targetId);
             
             if (targetSection) {
+                // Close mobile menu if open
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+                
                 targetSection.scrollIntoView({
                     behavior: 'smooth',
                     block: 'start'
@@ -31,6 +101,34 @@ function initializeNavigation() {
             }
         });
     });
+}
+
+// Mobile Menu Functions
+function initializeMobileMenu() {
+    const mobileMenuButton = document.querySelector('.mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener('click', function() {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            
+            if (isHidden) {
+                mobileMenu.classList.remove('hidden');
+                this.setAttribute('aria-expanded', 'true');
+            } else {
+                mobileMenu.classList.add('hidden');
+                this.setAttribute('aria-expanded', 'false');
+            }
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!mobileMenuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
+                mobileMenu.classList.add('hidden');
+                mobileMenuButton.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
 }
 
 // Smooth Scrolling Setup
@@ -165,6 +263,82 @@ function getStakeholderColor(type) {
 // Demo Management
 function showDemo(demoType) {
     currentDemo = demoType;
+    
+    // Check if we're on mobile
+    const isMobile = window.innerWidth < 768;
+    
+    if (isMobile) {
+        // Mobile: Show in modal
+        showMobileDemo(demoType);
+    } else {
+        // Desktop: Show in demoDisplay area
+        showDesktopDemo(demoType);
+    }
+    
+    // Update demo card styling
+    updateDemoCardStyling(demoType);
+}
+
+function showMobileDemo(demoType) {
+    // Get demo content
+    const demoContent = getDemoContent(demoType);
+    
+    // Create mobile demo modal
+    const modalHTML = createMobileDemoModal(demoContent);
+    
+    // Remove existing modal if any
+    const existingModal = document.getElementById('mobileDemoModal');
+    if (existingModal) {
+        existingModal.remove();
+    }
+    
+    // Add modal to body
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    
+    // Setup modal event listeners
+    setupMobileDemoModal();
+    
+    // Show modal with animation
+    const modal = document.getElementById('mobileDemoModal');
+    setTimeout(() => {
+        modal.classList.add('show');
+    }, 10);
+    
+    // Prevent body scroll
+    document.body.style.overflow = 'hidden';
+    
+    // Initialize demo-specific charts
+    setTimeout(() => {
+        initializeDemoCharts(demoType);
+    }, 300);
+}
+
+function setupMobileDemoModal() {
+    const modal = document.getElementById('mobileDemoModal');
+    const modalContent = modal.querySelector('.bg-white');
+    
+    // Close modal when clicking backdrop
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeMobileDemo();
+        }
+    });
+    
+    // Prevent modal from closing when clicking inside content
+    modalContent.addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
+    
+    // Close on escape key
+    document.addEventListener('keydown', function handleEscape(e) {
+        if (e.key === 'Escape') {
+            closeMobileDemo();
+            document.removeEventListener('keydown', handleEscape);
+        }
+    });
+}
+
+function showDesktopDemo(demoType) {
     const demoDisplay = document.getElementById('demoDisplay');
     
     // Clear existing content
@@ -177,13 +351,121 @@ function showDemo(demoType) {
     const demoHTML = createDemoInterface(demoContent);
     demoDisplay.innerHTML = demoHTML;
     
+    // Smooth scroll to demo display
+    demoDisplay.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+    });
+    
     // Initialize demo-specific charts
     setTimeout(() => {
         initializeDemoCharts(demoType);
     }, 100);
-    
-    // Update demo card styling
-    updateDemoCardStyling(demoType);
+}
+
+function createMobileDemoModal(demo) {
+    if (!demo.title) {
+        return `
+            <div id="mobileDemoModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+                <div class="bg-white rounded-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
+                    <div class="sticky top-0 bg-white border-b border-gray-200 p-4 flex justify-between items-center rounded-t-2xl">
+                        <h3 class="text-lg font-bold text-gray-900">Demo Not Available</h3>
+                        <button onclick="closeMobileDemo()" class="text-gray-500 hover:text-gray-700">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                    <div class="p-6 text-center">
+                        <i class="fas fa-exclamation-triangle text-gray-300 text-4xl mb-4"></i>
+                        <p class="text-gray-500">This demo is currently being updated</p>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    return `
+        <div id="mobileDemoModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-end justify-center transition-all duration-300 opacity-0 translate-y-full">
+            <div class="bg-white rounded-t-2xl w-full max-h-[85vh] overflow-y-auto transform transition-transform duration-300">
+                <div class="sticky top-0 bg-white border-b border-gray-200 p-4 flex justify-between items-center rounded-t-2xl">
+                    <div class="flex items-center">
+                        <i class="${demo.icon} text-${demo.color}-600 mr-3"></i>
+                        <h3 class="text-lg font-bold text-gray-900">${demo.title}</h3>
+                    </div>
+                    <button onclick="closeMobileDemo()" class="text-gray-500 hover:text-gray-700 p-2">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <div class="p-6 space-y-6">
+                    <div>
+                        <p class="text-gray-600 mb-4">${demo.subtitle}</p>
+                        <div class="flex flex-wrap gap-2">
+                            <button class="bg-${demo.color}-600 text-white px-4 py-2 rounded-lg text-sm">
+                                Export Data
+                            </button>
+                            <button class="border border-${demo.color}-600 text-${demo.color}-600 px-4 py-2 rounded-lg text-sm">
+                                Configure
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-3">
+                        ${demo.metrics.map(metric => `
+                            <div class="bg-gray-50 rounded-lg p-3 text-center">
+                                <div class="text-lg font-bold text-${metric.color}-600 mb-1">${metric.value}</div>
+                                <div class="text-xs text-gray-600">${metric.label}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="bg-white rounded-lg border border-gray-200 p-4">
+                        <div class="flex justify-between items-center mb-4">
+                            <h4 class="text-base font-semibold">Performance Visualization</h4>
+                            <div class="flex space-x-2 text-xs">
+                                <button class="text-${demo.color}-600 border-b-2 border-${demo.color}-600 pb-1">Chart</button>
+                                <button class="text-gray-500">Table</button>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <canvas id="demo-${demo.chartType}" style="height: 200px;"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-${demo.color}-50 rounded-lg p-4">
+                            <h5 class="font-semibold text-${demo.color}-900 mb-2">Key Insights</h5>
+                            <ul class="text-sm text-${demo.color}-800 space-y-1">
+                                <li>• Performance above sector average</li>
+                                <li>• Consistent improvement trajectory</li>
+                                <li>• Strong benchmarking position</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h5 class="font-semibold text-gray-900 mb-2">Recommendations</h5>
+                            <ul class="text-sm text-gray-700 space-y-1">
+                                <li>• Maintain current protocols</li>
+                                <li>• Focus on efficiency gains</li>
+                                <li>• Expand successful practices</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function closeMobileDemo() {
+    const modal = document.getElementById('mobileDemoModal');
+    if (modal) {
+        modal.classList.remove('show');
+        modal.classList.add('opacity-0', 'translate-y-full');
+        
+        setTimeout(() => {
+            modal.remove();
+            document.body.style.overflow = 'auto';
+        }, 300);
+    }
 }
 
 function getDemoContent(type) {
