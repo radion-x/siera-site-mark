@@ -1,0 +1,4 @@
+SIERA Site Version: Mobile Demo Fix
+Deployed: 2025-09-13
+Features: Mobile modal demos, responsive interactions
+Build: 836708d
