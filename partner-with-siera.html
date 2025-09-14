@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Partner with Siera</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <style>/* same small styles as above */</style>
+</head>
+<body>
+  <h1>Partner with Siera</h1>
+  <form id="form">
+    <fieldset>
+      <legend>Partner details</legend>
+      <label>Partner type <span class="req">*</span></label>
+      <select name="partnerType" required>
+        <option>Referral Partner</option>
+        <option>Implementation Partner (MSP/IT)</option>
+        <option>PMS/EHR Vendor</option>
+        <option>Channel/Reseller</option>
+        <option>Strategic Alliance</option>
+      </select>
+
+      <div class="row" style="margin-top:8px">
+        <div><label>Organisation name <span class="req">*</span></label><input name="orgName" required></div>
+        <div><label>Website <span class="req">*</span></label><input type="url" name="website" placeholder="https://" required></div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Primary contact</legend>
+      <div class="row">
+        <div><label>First name <span class="req">*</span></label><input name="firstName" required></div>
+        <div><label>Last name <span class="req">*</span></label><input name="lastName" required></div>
+      </div>
+      <div class="row">
+        <div><label>Work email <span class="req">*</span></label><input type="email" name="workEmail" required></div>
+        <div><label>Phone</label><input name="phone" placeholder="+61 …"></div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Coverage & capability</legend>
+      <label>Regions covered</label>
+      <input name="regions" placeholder="AU, NZ, APAC…">
+      <div class="row" style="margin-top:8px">
+        <div>
+          <label>Staff count <span class="req">*</span></label>
+          <select name="staffCount" required>
+            <option>1–5</option><option>6–10</option><option>11–25</option>
+            <option>26–50</option><option>51–100</option><option>100+</option>
+          </select>
+        </div>
+        <div>
+          <label>Technical capabilities</label>
+          <input name="technicalCapabilities" placeholder="HL7/FHIR, Integrations, Migrations…">
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label>Partner model</label>
+          <select name="partnerModel">
+            <option>Referral</option><option>Reseller</option><option>Co-sell</option><option>OEM/Embedded</option><option>Undecided</option>
+          </select>
+        </div>
+        <div>
+          <label>Expected lead volume</label>
+          <select name="expectedLeadVolume">
+            <option>0–5/mo</option><option>5–20/mo</option><option>20–50/mo</option><option>50+/mo</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div><label>CRM in use</label><input name="crmInUse" placeholder="HubSpot, Salesforce…"></div>
+        <div><label>Certifications</label><input name="certifications" placeholder=""></div>
+      </div>
+      <label><input type="checkbox" name="ndaRequired"> NDA required</label>
+      <label>Comments</label><textarea name="comments" rows="3"></textarea>
+    </fieldset>
+
+    <label><input type="checkbox" name="marketingOptIn"> Keep me updated by email</label>
+    <label><input type="checkbox" name="privacyAccepted" required> I agree to the Privacy Policy</label>
+
+    <div style="margin-top:12px"><button type="submit">Submit</button></div>
+    <div id="msg" class="error" hidden></div>
+    <div id="ok" class="ok" hidden>Thanks — we’ll be in touch.</div>
+  </form>
+
+  <script>
+    const API_BASE = 'https://siera-api.entropyhealth.au';
+    const $ = s => document.querySelector(s);
+    $('#form').addEventListener('submit', async (e) => {
+      e.preventDefault(); $('#msg').hidden = true;
+
+      const f = new FormData(e.target);
+      const payload = {
+        formType: 'PARTNER',
+        partnerType: f.get('partnerType'),
+        orgName: f.get('orgName')?.toString().trim(),
+        website: f.get('website')?.toString().trim(),
+        partnerContact: {
+          firstName: f.get('firstName')?.toString().trim(),
+          lastName: f.get('lastName')?.toString().trim(),
+          workEmail: f.get('workEmail')?.toString().trim(),
+          phone: f.get('phone')?.toString().trim() || undefined
+        },
+        regionsCovered: (f.get('regions')?.toString().split(',') || []).map(s => s.trim()).filter(Boolean),
+        staffCount: f.get('staffCount'),
+        technicalCapabilities: (f.get('technicalCapabilities')?.toString().split(',') || []).map(s => s.trim()).filter(Boolean),
+        certifications: f.get('certifications')?.toString().trim() || undefined,
+        partnerModel: f.get('partnerModel') || undefined,
+        expectedLeadVolume: f.get('expectedLeadVolume') || undefined,
+        crmInUse: f.get('crmInUse')?.toString().trim() || undefined,
+        ndaRequired: !!f.get('ndaRequired'),
+        comments: f.get('comments')?.toString().trim() || undefined,
+        marketingOptIn: !!f.get('marketingOptIn'),
+        privacyAccepted: !!f.get('privacyAccepted')
+      };
+
+      try{
+        const r = await fetch(`${API_BASE}/leads`, {method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)});
+        const json = await r.json();
+        if (!r.ok) throw new Error(json.error||'Submit failed');
+        $('#ok').hidden=false; e.target.reset();
+      }catch(err){ $('#msg').textContent=err.message; $('#msg').hidden=false; }
+    });
+  </script>
+</body>
+</html>
